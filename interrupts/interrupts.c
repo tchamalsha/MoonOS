@@ -1,8 +1,8 @@
 #include "interrupts.h"
 #include "pic.h"
 #include "../driver/io.h"
-#include "../driver/framebuffer.h"
-#include "../driver/serial.h"
+#include "../driver/writer.h"
+#include "../driver/serial_port.h"
 #include "keyboard.h"
 
 #define INTERRUPTS_DESCRIPTOR_COUNT 256 
