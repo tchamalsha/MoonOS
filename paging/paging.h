@@ -1,68 +1,37 @@
-#ifndef PAGING_H
-#define PAGING_H
+#ifndef __PAGING_H__
+#define __PAGING_H__
 
-// paging mode : 
-// NON PAE 4K Mode (32 bit) - level 0 page, 1 PT, 2 PD  <--  
-// NON PAE 4M Mode (32 bit) - level 0 page, 2 PD 
-// PAE 4K Mode (32 bit) - level 0 page, 1 PT, 2 PD, 3 PDP 
-// PAE 4M Mode (32 bit) - level 0 page, 2 PD, 3 PDP
-// LONG MODE 4K (64 bit) - level 0 page, 1 PT, 2 PD, 3 PDP, 4 PML4
+#include <stdint.h>
 
+struct directory {
+  uint8_t present:1;        // bit 0: always 1
+  uint8_t rw:1;             // bit 1: read/write
+  uint8_t us:1;             // bit 2: user or supervisor
+  uint8_t pwt:1;            // bit 3: page-level write-through
+  uint8_t pcd:1;            // bit 4: page-level cache disable
+  uint8_t a:1;              // bit 5: accessed
+  uint8_t ignored:1;        // bit 6:
+  uint8_t ps:1;             // bit 7: page size, 0=4KB 1=4MB, must be 0 for this struct
+  uint8_t ignored2:4;       // bit 8 - 11
+  uint32_t page_table:20;   // bit 12 - 31: physical address of 4KB aligned page table referenced by this entry
+} __attribute__((packed));
+typedef struct directory directory_t;
 
-#define NUM_PAGES 1024
-#define PAGE_FRAME_SIZE 4096
+struct page {
+  uint8_t present:1;        // bit 0: always 1
+  uint8_t rw:1;             // bit 1: read/write
+  uint8_t us:1;             // bit 2: user or supervisor
+  uint8_t pwt:1;            // bit 3: page-level write-through
+  uint8_t pcd:1;            // bit 4: page-level cache disable
+  uint8_t a:1;              // bit 5: accessed
+  uint8_t d:1;              // bit 6: dirty
+  uint8_t pat:1;            // bit 7: must be 0 unless PAT supported
+  uint8_t g:1;              // bit 8: global translation
+  uint8_t ignored2:3;       // bit 9 - 11
+  uint32_t page_frame:20;   // bit 12 - 31: physical address of 4KB page frame
+} __attribute__((packed));
+typedef struct page page_t;
 
-#define PRESENT         1
-#define PAGE_READONLY   0
-#define PAGE_READWRITE  1
-#define PAGE_USER       1
-#define PAGE_KERNEL     0
-#define PAGE_SIZE_4KB   0
-#define PAGE_SIZE_4MB   1
-
-typedef struct page
-{
-   unsigned int present    : 1;   // Page present in memory
-   unsigned int rw         : 1;   // Read-only if clear, readwrite if set
-   unsigned int user       : 1;   // Supervisor level only if clear
-   unsigned int accessed   : 1;   // Has the page been accessed since last refresh?
-   unsigned int dirty      : 1;   // Has the page been written to since last refresh?
-   unsigned int unused     : 7;   // Amalgamation of unused and reserved bits
-   unsigned int frame      : 20;  // Frame address (shifted right 12 bits)
-} page_t;
-
-typedef struct page_table
-{
-   page_t pages[1024] __attribute__((aligned(4096)));
-} page_table_t;
-
-typedef struct page_directory
-{
-   /**
-      Array of pointers to pagetables.
-   **/
-   page_table_t *tables[1024];
-   /**
-      Array of pointers to the pagetables above, but gives their *physical*
-      location, for loading into the CR3 register.
-   **/
-   unsigned int tablesPhysical[1024];
-   /**
-      The physical address of tablesPhysical. This comes into play
-      when we get our kernel heap allocated and the directory
-      may be in a different location in virtual memory.
-   **/
-   unsigned int physicalAddr;
-} page_directory_t;
-
-
-
-/**
-  Sets up the environment, page directories etc and
-  enables paging.
-**/
 void init_paging();
-
-void page_fault();
 
 #endif

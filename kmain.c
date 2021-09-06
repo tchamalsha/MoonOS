@@ -4,7 +4,7 @@
 #include "interrupts/keyboard.h"
 #include "interrupts/interrupts.h"
 #include "multiboot.h"
-#include "paging/paging.h"
+#include "paging/paging.c"
 
 void init(){
 

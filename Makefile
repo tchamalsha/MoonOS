@@ -1,7 +1,7 @@
-    OBJECTS = loader.o kmain.o io.o segmentation/gdt.o segmentation/memory_segments.o interrupts/idt.o interrupts/interrupt_handlers.o interrupts/interrupts.o interrupts/pic.o interrupts/keyboard.o driver/serial_port.o paging/paging.o paging/paging_enable.o utils/common/common.o
+    OBJECTS = loader.o kmain.o io.o segmentation/gdt.o segmentation/memory_segments.o interrupts/idt.o interrupts/interrupt_handlers.o interrupts/interrupts.o interrupts/pic.o interrupts/keyboard.o driver/serial_port.o paging/paging_enable.o utils/common/common.o paging/kheap.o interrupts/isr.o 
     CC = gcc
-    CFLAGS = -m32 -nostdlib -nostdinc -fno-builtin -fno-stack-protector \
-             -nostartfiles -nodefaultlibs -Wall -Wextra -Werror -c
+    CFLAGS = -m32 -nostdlib -fno-builtin -fno-stack-protector \
+              -Wno-unused -nostartfiles -nodefaultlibs -Wall -Wextra -Werror -c -masm=intel
     LDFLAGS = -T link.ld -melf_i386
     AS = nasm
     ASFLAGS = -f elf

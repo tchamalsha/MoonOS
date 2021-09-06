@@ -5,6 +5,7 @@
 #include "../driver/serial_port.h"
 #include "keyboard.h"
 
+
 #define INTERRUPTS_DESCRIPTOR_COUNT 256 
 #define INTERRUPTS_KEYBOARD 33 
 #define INTERRUPTS_PAGING 14 
@@ -69,7 +70,11 @@ void interrupt_handler(__attribute__((unused)) struct cpu_state cpu, unsigned in
 				serial_write(str, 1);
 			}
 			pic_acknowledge(interrupt);
-			break;		
+			break;	
+			
+		
+		default:
+			break;	
     }
 }
 
