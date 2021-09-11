@@ -11,7 +11,7 @@ Files which should be created in paticuler segment is mentioned under bellow.
 * menu.lst
 * borchsrc.txt
 
-Blog article : https://tharu-chamalsha.medium.com/implementing-operating-system-dbe9961971dd
+Blog article : https://tharu-chamalsha.medium.com/implementing-operating-system-dbe9961971dd <br>
 Branch       : https://github.com/tchamalsha/MoonOS/tree/setup_booting_os
 
 ## 2. Getting to c
@@ -19,7 +19,7 @@ Branch       : https://github.com/tchamalsha/MoonOS/tree/setup_booting_os
 * kmain.c
 * makefile
 
-Blog article : https://tharu-chamalsha.medium.com/implementing-an-operating-system-2-f003d1a4f9c
+Blog article : https://tharu-chamalsha.medium.com/implementing-an-operating-system-2-f003d1a4f9c <br>
 Branch       : https://github.com/tchamalsha/MoonOS/tree/implement_with_c
 
 ## 3. Output
@@ -31,7 +31,7 @@ Branch       : https://github.com/tchamalsha/MoonOS/tree/implement_with_c
 * serial_port.c
 * serial_port.h
 
-Blog article : https://tharu-chamalsha.medium.com/implementing-operating-system-3-1acc3dc96a52
+Blog article : https://tharu-chamalsha.medium.com/implementing-operating-system-3-1acc3dc96a52 <br>
 Branch       : https://github.com/tchamalsha/MoonOS/tree/setup_booting_os
 
 
