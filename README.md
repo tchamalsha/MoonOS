@@ -1,2 +1,2 @@
 # MoonOS
-My very first operating system
+This is an Operating System which is made using the littleosbook (https://littleosbook.github.io)
