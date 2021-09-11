@@ -1,5 +1,5 @@
 # MoonOS
-This is an Operating System which is made using the littleosbook (https://littleosbook.github.io).
+This is an Operating System which is made using the <a href="https://littleosbook.github.io">littleOS</a>.
 
 To every sub topic I have made a seperate branch and a blog article. Carefully read the articles and reference materilals in order to make your own OS.
 Files which should be created in paticuler segment is mentioned under bellow.
